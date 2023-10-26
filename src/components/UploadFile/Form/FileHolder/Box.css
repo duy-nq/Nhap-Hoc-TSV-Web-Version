@@ -1,0 +1,43 @@
+.box-container {
+    display: flex;
+    flex-direction: row;
+    margin: 15px 10px 15px 15px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 40px;
+    align-items: center;
+}
+
+#file-logo {
+    margin-left: 15px;
+}
+
+#file-name {
+    margin-left: 20px;
+    margin-right: 10px;
+
+    font-weight: 300;
+    font-size: small;
+}
+
+.remove-btn {
+    display: flex;
+    background-color: transparent;
+    color: rgba(0, 0, 0, 0.2);
+    
+    border-top-right-radius: 22px;
+    border-bottom-right-radius: 22px;
+
+    align-items: center;
+
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+
+    width: auto;
+    height: 100%;
+}
+
+.remove-btn:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: white;
+}

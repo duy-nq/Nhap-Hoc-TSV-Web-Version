@@ -1,0 +1,35 @@
+.header {
+    padding: 9px 10px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 7px;
+    justify-content: left;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+
+    font-family: 'Roboto', sans-serif;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #f44242;
+    align-items: center;
+    margin-left: 50px;
+    margin-right: 20px;
+    width: 100%;
+}
+
+.number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    font-weight: bold;
+    color: #f44242;
+    padding: 15px 30px;
+    margin: 0;
+    border-radius: 7px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+}
