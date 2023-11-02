@@ -12,17 +12,16 @@ export default function FileHolder(props) {
     };
 
     const handleUploadClick = () => {
-        const button = document.querySelector('.upload-btn');       
-
-        // Attach the hidden input to the button
         const input = document.createElement('input');
         input.type = 'file';
         input.multiple = true;
         input.accept = props.accept;
         input.onchange = handleFileChange;
         input.click();
+
+        console.log('fetching files');
     };
-    
+
     return (
         <div className="file-container">
             <div className="file-title">
@@ -35,7 +34,7 @@ export default function FileHolder(props) {
             </div>
             <div className="file-content">
                 {files.map((file, index) => (
-                    <Box fileName={file.name} />
+                    <Box key={index} fileName={file.name}/>
                 ))}
             </div>
         </div>
