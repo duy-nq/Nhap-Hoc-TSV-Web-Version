@@ -89,7 +89,7 @@
 }
 
 /*access the second form-content-row in the form-container*/
-.form-container > :nth-child(5) {
+.bank-container .form-container > :nth-child(5) {
     flex-direction: row-reverse;
     margin-right: -15px;
 }

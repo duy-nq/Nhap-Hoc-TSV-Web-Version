@@ -1,0 +1,88 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-title {
+    margin-left: 10px;
+    font-size: 1.5rem;
+}
+
+.select-ktx {
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 80%;
+    border: transparent;
+    font-size: 1.8rem;
+    font-weight: bolder;
+    color: #f44242;
+}
+
+.ktx-text {
+    margin-left: 15px;
+    font-size: 1.0rem;
+    font-style: italic;
+    font-weight: 400;
+    margin-right: 10px;
+    color: darkgray;
+}
+
+.uniform-title {
+    margin-left: 15px;
+    margin-top: 10px;
+    font-size: 1.8rem;
+    font-weight: bolder;
+    margin-bottom: 10px;
+    color: #f44242;
+}
+
+.uniform-container {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.3rem;
+}
+
+.uniform-option {
+    margin-left: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px;
+    font-style: italic;
+    color: darkgray;
+}
+
+.uniform-quantity {
+    display: flex;
+    margin-left: 30px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    align-items: center;
+}
+
+.uniform-quantity input {
+    width: 50px;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-right: 5px;
+}
+
+.size-text {
+    margin-top: 0px;
+    margin-left: 15px;
+    font-size: 1.0rem;
+    font-style: italic;
+    font-weight: 400;
+    margin-right: 10px;
+    color: darkgray;
+}
+
+.form-container > .btn-holding {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 10px;
+}

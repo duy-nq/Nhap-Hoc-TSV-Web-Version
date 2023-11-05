@@ -11,7 +11,7 @@ export default function HomePage() {
       </nav>
       <section className='home--section'>
         <form method='POST'>
-          <h2>HỆ THỐNG NHẬP HỌC TRỰC TUYẾN</h2>
+          <h2 classname="service">HỆ THỐNG NHẬP HỌC TRỰC TUYẾN</h2>
           <label for="username">Tên đăng nhập</label>
           <input type="text" id="username" name="username" placeholder="Số CCCD" required/>
 

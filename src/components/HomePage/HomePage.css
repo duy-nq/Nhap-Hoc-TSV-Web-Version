@@ -62,10 +62,19 @@ nav {
     font-family: Roboto, sans-serif;
 }
 
+.home--section form {
+    text-align: center;
+}
+
 form label {
     text-align: left ;
     width: 60%;
     font-style: italic;
+}
+
+/*access h2 in form*/
+form h2 {
+    width: 50%;
 }
 
 input[type="text"],

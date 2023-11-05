@@ -6,8 +6,7 @@ export default function Form() {
     return (
         <div className="form-container">
             <FileHolder title="1. Học bạ THPT (*)"
-                sub="Bản sao công chứng"
-            />
+                sub="Bản sao công chứng"/>
             <FileHolder title="2. Giấy xác nhận tốt nghiệp THPT tạm thời (*)"
                 sub="Yêu cầu bằng tốt nghiệp đối với thí sinh tốt nghiệp từ năm 2022 trở về trước"/>
             <FileHolder title="3. Giấy khai sinh (*)"
