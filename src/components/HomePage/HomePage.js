@@ -1,8 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './HomePage.css';
 import logo from '../../logo/Logo_PTIT_University.png';
 
-export default function HomePage() {
+export default function HomePage() {  
   return (
     <div className='home--container'>
       <nav>
@@ -18,7 +19,7 @@ export default function HomePage() {
           <label for="password">Mật khẩu</label>
           <input type="password" id="password" name="password" placeholder="Mặc định ddmmyyyy" required/>
 
-          <button type="submit">Đăng nhập</button>
+          <button type="submit" className='login-button'>Đăng nhập</button>
         </form>
       </section>
     </div>
