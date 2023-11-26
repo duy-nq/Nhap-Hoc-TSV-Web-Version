@@ -3,6 +3,11 @@ import "./Form.css";
 import FileHolder from "./FileHolder/FileHolder";
 
 export default function Form() {
+    const OpenPopUp = () => {
+        // display popup
+        document.querySelector(".popup").style.display = "flex";
+    }
+    
     return (
         <div className="form-container">
             <FileHolder title="1. Học bạ THPT (*)"
@@ -25,6 +30,10 @@ export default function Form() {
             <FileHolder title="10. Thẻ BHYT (*)"/>
             <FileHolder title="11. Chứng chỉ Anh Văn hoặc QPAN"
                 sub="Xem trong danh mục đính kèm"/>
+            <div className="btn-container">
+                <button className="guide-btn" onClick={OpenPopUp}>Xem hướng dẫn</button>
+                <button className="confirm-btn">Xác nhận</button>
+            </div>
         </div>
     );
 }
