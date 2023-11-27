@@ -12,7 +12,6 @@ export default function Main() {
         { number: "4", title: "Đồng phục và KTX" },
         { number: "5", title: "Phương thức thanh toán" },
         { number: "6", title: "Hoàn thành" },
-        // add more elements here
     ]);
 
     const [showContentBoxes, setShowContentBoxes] = useState(true);
