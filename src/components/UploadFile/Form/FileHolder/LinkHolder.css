@@ -1,0 +1,41 @@
+.popup-link {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* blur background */
+    backdrop-filter: blur(3px);
+}
+
+.popup-inner-link {
+    position: relative;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    width: 50%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    backdrop-filter: blur(3px);
+}
+
+.link {
+    color: royalblue;
+    font-size: 1.0rem;
+    font-weight: 500;
+    margin: 0 1rem;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+}

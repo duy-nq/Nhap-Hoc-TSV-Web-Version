@@ -14,8 +14,7 @@ export default function UploadFile() {
                 content="Tên file gồm 3 phần: 
                 Mã hồ sơ-MSSV-Thứ tự của từng file ảnh.
                 Ví dụ với mục Giấy khai sinh: 03-N23xxxx001-1.
-                Ví dụ với mục Học bạ: 01-N23xxxx001-1, 01-N23xxxx001-2, v.v
-                "
+                Ví dụ với mục Học bạ: 01-N23xxxx001-1, 01-N23xxxx001-2, v.v"
             />
         </div>
     );
