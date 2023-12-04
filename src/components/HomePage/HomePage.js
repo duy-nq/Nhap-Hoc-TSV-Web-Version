@@ -1,5 +1,6 @@
 import React from 'react';
 import {useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';  
 import './HomePage.css';
 import logo from '../../logo/Logo_PTIT_University.png';
 
@@ -8,8 +9,15 @@ export default function HomePage() {
   const navigate = useNavigate();
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
+
+  useEffect(() => {
+    localStorage.removeItem('token');
+  }, []);
+
   const Login = () => {   
+    
     if (username === 'admin' && password === 'admin') {
+      localStorage.setItem('token', username)
       navigate('/main');
     }
     else {
