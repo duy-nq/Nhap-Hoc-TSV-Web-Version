@@ -12,8 +12,6 @@ import Last from "./components/Last/Last";
 import withAuth from "./HOCS";
 
 export default function App() {
-    const protectedPage01 = withAuth(Main);
-
     const protectedPage = [
         withAuth(Main),
         withAuth(Info),

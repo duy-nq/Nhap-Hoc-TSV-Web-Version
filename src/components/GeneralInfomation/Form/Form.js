@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React from "react";
+import { useEffect } from "react";
 import './Form.css';
 
 import Static from "./Static/Static";
@@ -6,6 +7,20 @@ import Static from "./Static/Static";
 export default function Form() {
     const [tmp, setTmp] = React.useState("");
     
+    // get json via API
+    const [data, setData] = React.useState([]);
+
+    const link = "/api/SinhVien/"+localStorage.getItem("id");
+
+    useEffect(() => {
+        fetch(link)
+        .then((res) => res.json())
+        .then((data) => setData(data));
+    }, []);
+
+    console.log(data.ngaySinh);
+
+
     const HandleChange = () => {
         //if checkbox is checked
         if(document.getElementById("check").checked) {
@@ -16,15 +31,26 @@ export default function Form() {
             setTmp("");
         }
     }
+
+    const date = formatDate(data.ngaySinh);
+
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based in JavaScript
+        const year = date.getFullYear();
+      
+        return `${day}/${month}/${year}`;
+    }
     
     return (
         <div>
             <Static 
-                Path="../../../../img/personal-test.jpg"
-                SBD="020145200" 
-                HoTen="Fernando Llorente" 
-                NgaySinh="25-02-2005"
-                GioiTinh={"Nam"}
+                Path={data.link}
+                SBD={data.soCCCD}
+                HoTen={data.hoTen} 
+                NgaySinh={date}
+                GioiTinh={data.gioiTinh}
             />
             <h1 className="sub-title">BỔ SUNG CÁC THÔNG TIN DƯỚI ĐÂY</h1>
             <form className="form-container">

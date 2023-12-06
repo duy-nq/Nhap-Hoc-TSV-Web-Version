@@ -12,18 +12,44 @@ export default function HomePage() {
 
   useEffect(() => {
     localStorage.removeItem('token');
+    localStorage.removeItem('id');
   }, []);
 
-  const Login = () => {   
-    
-    if (username === 'admin' && password === 'admin') {
-      localStorage.setItem('token', username)
-      navigate('/main');
+  const HandleSubmit = (event) => {
+    event.preventDefault();
+    Login(username, password);
+  }
+
+  // Example of a login function
+  async function Login(username, password) {   
+    const response = await fetch('/api/Login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 'soCCCD': username, 'matKhau': password }),
+  });
+
+  if (response.ok) {
+    const res = await response.json();
+
+    console.log(res.message);
+
+    if (res.data === null) {
+      alert('Sai tên đăng nhập hoặc mật khẩu!');
+      setUsername('');
+      setPassword('');
+      localStorage.removeItem('token');
+      localStorage.removeItem('id');
     }
     else {
-      alert('Username or password is incorrect');
+      localStorage.setItem('token', res.data);
+      localStorage.setItem('id', username);
+      navigate('/main');
+    
     }
-  };
+  }
+}
 
   const TypeUsername = (event) => {
     setUsername(event.target.value);
@@ -40,9 +66,9 @@ export default function HomePage() {
         <h1 className='nav--title'>Học Viện Công Nghệ Bưu Chính Viễn Thông</h1>
       </nav>
       <section className='home--section'>
-        <form method='POST'>
-          <h2 classname="service">HỆ THỐNG NHẬP HỌC TRỰC TUYẾN</h2>
-          <label for="username">Tên đăng nhập</label>
+        <form onSubmit={HandleSubmit}>
+          <h2 className="service">HỆ THỐNG NHẬP HỌC TRỰC TUYẾN</h2>
+          <label htmlFor="username">Tên đăng nhập</label>
           <input 
             type="text" 
             id="username" 
@@ -52,7 +78,7 @@ export default function HomePage() {
             value={username} 
             required
           />
-          <label for="password">Mật khẩu</label>
+          <label htmlFor="password">Mật khẩu</label>
           <input 
             type="password" 
             id="password" 
@@ -62,7 +88,7 @@ export default function HomePage() {
             value={password} 
             required
           />
-          <button type="submit" className='login-button' onClick={Login}>Đăng nhập</button>  
+          <button type='submit' className='login-button'>Đăng nhập</button>  
         </form>
       </section>
     </div>

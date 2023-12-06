@@ -45,7 +45,7 @@ export default function FileHolder(props) {
             <div className="popup-link" id={props.id}>
                 <div className="popup-inner-link">
                     <h1>{props.title}</h1>
-                    <input className="link" type="text" value={linkToFile} onchange={linkChange}/>
+                    <input className="link" type="text" value={linkToFile} onChange={linkChange}/>
                     <button onClick={Confirm}>Xác nhận</button>
                 </div>
             </div>
