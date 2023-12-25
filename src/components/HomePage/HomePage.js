@@ -46,7 +46,6 @@ export default function HomePage() {
       localStorage.setItem('token', res.data);
       localStorage.setItem('id', username);
       navigate('/main');
-    
     }
   }
 }

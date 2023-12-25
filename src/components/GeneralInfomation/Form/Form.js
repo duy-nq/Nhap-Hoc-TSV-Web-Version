@@ -1,8 +1,9 @@
 import React from "react";
 import { useEffect } from "react";
-import './Form.css';
+import './Form.css'; 
 
 import Static from "./Static/Static";
+import Relative from "./Static/Relative";
 
 export default function Form() {
     const [tmp, setTmp] = React.useState("");
@@ -17,9 +18,6 @@ export default function Form() {
         .then((res) => res.json())
         .then((data) => setData(data));
     }, []);
-
-    console.log(data.ngaySinh);
-
 
     const HandleChange = () => {
         //if checkbox is checked
@@ -42,6 +40,14 @@ export default function Form() {
       
         return `${day}/${month}/${year}`;
     }
+
+    const test = () => {
+        // get all the address
+        const phoneNumber = document.getElementById("phone-number").value;
+        
+        // print all the address
+        console.log(phoneNumber);
+    }
     
     return (
         <div>
@@ -52,7 +58,7 @@ export default function Form() {
                 NgaySinh={date}
                 GioiTinh={data.gioiTinh}
             />
-            <h1 className="sub-title">BỔ SUNG CÁC THÔNG TIN DƯỚI ĐÂY</h1>
+            <h1 className="sub-title">THÔNG TIN CÁ NHÂN (*)</h1>
             <form className="form-container">
                 <input 
                     type="text" 
@@ -79,8 +85,12 @@ export default function Form() {
                     onChange={(e) => setTmp(e.target.value)}
                 />
             </form>
+            <h1 className="sub-title">THÔNG TIN NGƯỜI THÂN 1 (*)</h1>
+            <Relative id="1"/>
+            <h1 className="sub-title">THÔNG TIN NGƯỜI THÂN 2 (TÙY CHỌN)</h1>
+            <Relative id="2"/>
             <div className="btn-container">
-                <button className="btn btn--confirm">Xác nhận</button>
+                <button onClick={test} className="btn btn--confirm">Xác nhận</button>
             </div>
         </div>
     );
