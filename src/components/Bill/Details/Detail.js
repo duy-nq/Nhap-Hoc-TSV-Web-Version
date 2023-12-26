@@ -1,29 +1,57 @@
-import React from "react";
+import React, { useEffect } from "react";
 import './Detail.css';
 import Row from './Row';
 
 export default function Detail() {
+    const [data, setData] = React.useState([]);
+
+    var apiLink = 'api/HocPhi/chitiethp/' + localStorage.getItem('id');
+
+    useEffect(() => {
+        fetch(apiLink).then((res) => res.json()).then((data) => setData(data));
+    }, []);
+
     const fakeDataJson = [
         {
             "id": 1,
             "name": "Học phí",
-            "price": "10025200"
+            "price": String(data.hocPhi)
         },
         {
             "id": 2,
-            "name": "Ký túc xá",
-            "price": "350000"
+            "name": "Kinh phí nhập học",
+            "price": String(data.kinhPhiNhapHoc)
         },
         {
             "id": 3,
+            "name": "Bảo hiểm y tế",
+            "price": String(data.phiBHYT)
+        },
+        {
+            "id": 4,
+            "name": "Bảo hiểm tai nạn",
+            "price": String(data.phiBHTN)
+        },
+        {
+            "id": 5,
+            "name": "Ký túc xá",
+            "price": String(data.phiKTX)
+        },
+        {
+            "id": 6,
             "name": "Đồng phục các loại",
-            "price": "350000"
+            "price": String(data.phiDongPhuc)
+        },
+        {
+            "id": 7,
+            "name": "Phí chất lượng cao",
+            "price": String(data.phiCLC)
         }
     ];
 
-    // add to fakeData with fakeDataJson
 
-    const fakeData = fakeDataJson.map((item) => {
+    const fakeData = fakeDataJson.map((item) => {        
+        if (item.price == "0") return;
         return (
             <Row id={item.id} name={item.name} price={item.price} />
         );

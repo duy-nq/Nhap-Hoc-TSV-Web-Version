@@ -2,10 +2,26 @@ import React from "react";
 import { useState } from "react";
 import './Form.css';
 import SizePicker from "./SizePicker/Size";
+import Quantity from "./SizePicker/Quantity";
+import { useEffect } from "react";
 
 export default function Form() {
     const [text, setText] = useState("");
     
+    const [data, setData] = useState([]);
+
+    var apiLink = 'api/DongPhuc/danhsachdongphuc';
+
+    useEffect(() => {
+        fetch(apiLink).then((res) => res.json()).then((data) => setData(data));
+    }, []);
+
+    const quantity = data.map((item) => {
+        return (
+            <Quantity id = {item.maDongPhuc} name={item.tenDongPhuc} min="1"/>
+        );
+    });
+
     const changeDorm = () => {
         var value = document.querySelector(".select-ktx").value;
         if (value != "0") {
@@ -17,51 +33,26 @@ export default function Form() {
         }
     }
 
-    const NoTyping = (e) => {
-        e.preventDefault();
-    }
-
     const HandleConfirm = () => {
-        var value = document.querySelector(".select-ktx").value;
-        var quantity = [];
-        var size = [];
+        var quantity = document.querySelectorAll(".quantity");
+        var size = document.querySelectorAll(".select-size");
+        var data = [];
 
-        var uniform = document.getElementsByName("uniform");
-        var uniform_value = "";
-        for (var i = 0; i < uniform.length; i++) {
-            if (uniform[i].checked) {
-                uniform_value = uniform[i].value;
-                break;
-            }
-        }
+        for (var i = 0; i < quantity.length; i++) {
+            var tmp = quantity[i].value;
 
-        if (uniform_value == "no") {
-            for (var i = 0; i < 2; i++) {
-                var q = document.getElementsByName("quantity")[i].value;
-                if (q == "") {
-                    alert("Vui lòng nhập số lượng đồng phục!");
-                }
-                else {
-                    quantity.push(q);
-                }
+            if (tmp < 1) tmp = '1';
+            else if (tmp > 3) tmp = '3';
+            
+            var temp = {
+                id: quantity[i].parentNode.id,
+                quantity: tmp,
+                size: size[i].value
             }
+            data.push(temp);
         }
-        else if (uniform_value == "yes"){
-            quantity.push("1");
-            quantity.push("1");
-        }
-
-        // get value from size picker
-        var size_picker = document.querySelectorAll(".select-size");
-        for (var i = 0; i < 2; i++) {
-            var s = size_picker[i].value;
-            if (s == "0") {
-                alert("Vui lòng chọn size đồng phục!");
-            }
-            else {
-                size.push(s);
-            }
-        }
+        
+        console.log(data);
     }
 
     return (
@@ -75,29 +66,9 @@ export default function Form() {
                 <p className="ktx-text">{text}</p>
             </div>
             <div className="uniform-container">
-                <p className="uniform-title">Số lượng đồng phục</p>
-                <div className="uniform-option">
-                    <input type="radio" id="yes" name="uniform" value="yes"/>
-                    <label for="yes">Tiêu chuẩn (1 áo sơ mi + 1 bộ đồ thể dục)</label>
-                </div>
-                <div className="uniform-option">
-                    <input type="radio" id="no" name="uniform" value="no" />
-                    <label for="no">Tự chọn</label>
-                    <div className="uniform-quantity">
-                        <input type="number" id="quantity" name="quantity" min="1" max="3" onKeyDown={NoTyping}/>
-                        <label for="quantity">áo sơ mi</label>
-                    </div>
-                    <div className="uniform-quantity">
-                        <input type="number" id="quantity" name="quantity" min="1" max="3" onKeyDown={NoTyping}/>
-                        <label for="quantity">bộ đồ thể dục</label>
-                    </div>
-                </div>
-                <p className="uniform-title">Size đồng phục</p>
+                <p className="uniform-title">Lựa chọn đồng phục</p>
                 <a className="size-text" href="https://www.igift.hk/upload/xheditor/20151022140042112.jpg" target="_blank">Xem bảng hướng dẫn tại đây</a>
-                <div className="uniform-size">
-                    <SizePicker name="Áo sơ mi"/>
-                    <SizePicker name="Đồng phục thể dục"/>
-                </div>
+                {quantity}
             </div>
             <div className="btn-holding">
                 <button className="btn-confirm" onClick={HandleConfirm}>Xác nhận</button>

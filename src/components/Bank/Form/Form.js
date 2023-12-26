@@ -67,6 +67,7 @@ export default function Form() {
     
     const HandleConfirm = () => {
         console.log(selectedOption)
+        window.location.href = "/main";
     }
 
     return (
