@@ -1,10 +1,15 @@
 import React from "react";
 import "./Form.css";
 import FileHolder from "./FileHolder/FileHolder";
+import Main from "../../Main/Main";
 
 export default function Form() {
     const OpenPopUp = () => {
         document.querySelector('.popup').style.display = 'flex';
+    }
+
+    const Confirm = () => {
+        window.location.href = '/main';
     }
     
     return (
@@ -53,7 +58,7 @@ export default function Form() {
                 sub="Xem trong danh mục đính kèm"/>
             <div className="btn-container">
                 <button className="guide-btn" onClick={OpenPopUp}>Xem hướng dẫn</button>
-                <button className="confirm-btn">Xác nhận</button>
+                <button className="confirm-btn" onClick={Confirm}>Xác nhận</button>
             </div>
         </div>
     );

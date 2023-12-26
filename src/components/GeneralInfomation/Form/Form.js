@@ -4,6 +4,7 @@ import './Form.css';
 
 import Static from "./Static/Static";
 import Relative from "./Static/Relative";
+import Main from "../../Main/Main";
 
 export default function Form() {
     const [tmp, setTmp] = React.useState("");
@@ -42,11 +43,8 @@ export default function Form() {
     }
 
     const test = () => {
-        // get all the address
-        const phoneNumber = document.getElementById("phone-number").value;
-        
-        // print all the address
-        console.log(phoneNumber);
+        // redirect to home page
+        window.location.href = "/main";
     }
     
     return (

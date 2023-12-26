@@ -8,6 +8,7 @@ export default function FileHolder(props) {
     const [files, setFiles] = useState([]);
     const [link, setLink] = useState(false);
     const [linkToFile, setLinkToFile] = useState('');
+    const [isConfirm, setIsConfirm] = useState(false);
 
     const handleFileChange = (event) => {
         const selectedFiles = Array.from(event.target.files);
@@ -29,15 +30,41 @@ export default function FileHolder(props) {
         setLink(true);
     }
 
-    function linkChange(event) {
-        setLinkToFile(event.target.value);
-    }
+    function LinkHolder() { 
+        async function UploadFile(id, yourLink) {
+            var apiLink = '/api/SinhVien/hoso/' + localStorage.getItem('id');
+            
+            const response = await fetch(apiLink, 
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 'maHoSo': id, 'soCCCD': localStorage.getItem('id'), 'duongDan': yourLink }),
+            });
 
+            console.log(JSON.stringify({ 'maHoSo': id, 'soCCCD': localStorage.getItem('id'), 'duongDan': yourLink }));
+            
+            if (response.ok) {
+                alert('Thao tác hành công');
+            }
+            else {
+                alert('Nộp file thất bại');
+            }
+        }
 
-    function LinkHolder() {
         const Confirm = () => {
-            
-            
+            if (linkToFile !== '') {
+                setIsConfirm(true);
+                UploadFile(props.id, linkToFile);
+            }
+            setLink(false);
+        }
+
+        const Cancel = () => {
+            setLinkToFile('');
+            UploadFile(props.id, "");
+            setIsConfirm(false);
             setLink(false);
         }
         
@@ -45,8 +72,14 @@ export default function FileHolder(props) {
             <div className="popup-link" id={props.id}>
                 <div className="popup-inner-link">
                     <h1>{props.title}</h1>
-                    <input className="link" type="text" value={linkToFile} onChange={linkChange}/>
+                    <input 
+                        className="link" 
+                        type="text" 
+                        value={linkToFile} 
+                        onChange={(e) => setLinkToFile(e.target.value)}
+                    />
                     <button onClick={Confirm}>Xác nhận</button>
+                    {isConfirm && <button onClick={Cancel}>Hủy nộp file</button>}
                 </div>
             </div>
         );

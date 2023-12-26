@@ -3,6 +3,8 @@ import './Main.css';
 import logo from '../../logo/Logo_PTIT_University.png';
 import ContentBox from './ContentBox';
 
+var isDone = [false, false, false, false, false, false];
+
 export default function Main() {
     // json data for content box
     const [contentBoxes, setContentBoxes] = useState([

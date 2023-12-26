@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import './Main.css';
+import Main from "./Main";
 
 export default function ContentBox(props) {
     function MouseIn() {

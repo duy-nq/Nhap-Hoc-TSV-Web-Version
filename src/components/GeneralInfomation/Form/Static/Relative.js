@@ -202,6 +202,7 @@ export default function Relative(props) {
 
     const [selectedOption, setSelectedOption] = React.useState(options[188]);
     const [name, setName] = useState("");
+    const [nation, setNation] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [address, setAddress] = useState("");
     const [year, setYear] = useState("");
@@ -266,6 +267,18 @@ export default function Relative(props) {
                 onChange={(e) => (                    
                     !isNaN(e.target.value) && e.target.value.length <= 4 && 
                     setYear(e.target.value)      
+                )}
+                required
+            />
+            <input 
+                type="text" 
+                placeholder="Dân tộc"
+                className="text-input"
+                id="year"
+                value={nation}
+                onChange={(e) => (                    
+                    e.target.value.length <= 20 && 
+                    setNation(e.target.value)      
                 )}
                 required
             />
