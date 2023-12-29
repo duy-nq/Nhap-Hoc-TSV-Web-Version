@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Bill.css';
 import MainHeader from '../MainHeader/MainHeader';
 import Detail from './Details/Detail';
@@ -15,6 +15,51 @@ export default function Bill() {
         navigate("/main");
     }
 
+    async function CheckBill() {
+        var apiLink = 'api/HocPhi/chitiethp/' + localStorage.getItem('id');
+        
+        const response = await fetch(apiLink, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            if (data["phiDongPhuc"] === 0) {
+                alert("Vui lòng đăng ký đồng phục trước khi thực hiện thanh toán");
+                ToMain();
+            }
+        }
+        else {
+            console.log("Fail");
+        }   
+    }
+
+    async function GetBill() {
+        var apiLink = 'api/HocPhi/hoadon/' + localStorage.getItem('id');
+        
+        const response = await fetch(apiLink, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            var info = 'Mã hóa đơn: ' + data["maHD"] + '\n' 
+                        + 'Số tiền: ' + data["soTien"] + '\n' 
+                        + 'Thời điểm: ' + data["thoiDiem"] + '\n'
+                        + 'Nội dung: ' + data["noiDung"] + '\n';
+            alert(info);
+        }
+        else {
+            console.log("Fail");
+        }
+    }
+
     function Guide() {
         if (isPurchase) {
             alert("Bạn đã thanh toán học phí online");
@@ -25,6 +70,24 @@ export default function Bill() {
 
         setTimeout(ToMain, 3000);
     }
+
+    useEffect(() => {
+        var apiLink = 'api/HocPhi/getlink/' + localStorage.getItem('id');
+        
+        fetch(apiLink).then((res) => res.text()).then((data) => 
+            {
+                if (data === "Sinh viên đã thanh toán học phí online!")
+                {
+                    GetBill();
+                    window.location.href = "/main";
+                }
+            }
+        );
+    }, []);
+
+    useEffect(() => {
+        CheckBill();
+    }, []);
     
     async function Purchase() {
         var apiLink = 'api/HocPhi/getlink/' + localStorage.getItem('id');
@@ -39,7 +102,7 @@ export default function Bill() {
         const data = await response.text();
 
         if (data === "Sinh viên đã thanh toán học phí online!") {
-            alert(data);
+            GetBill();
             navigate("/main");
         }
 

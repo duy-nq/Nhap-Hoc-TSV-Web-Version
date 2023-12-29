@@ -315,9 +315,6 @@ export default function Relative(props) {
                 onChange={(e) => setAddress(e.target.value)}
                 required
             />
-            <div className="btn-container">
-                <button onClick={submit} className="btn btn--confirm" id="submitRelative">Lưu</button>
-            </div>
         </form>
     );
 }

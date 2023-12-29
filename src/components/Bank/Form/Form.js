@@ -5,7 +5,10 @@ export default function Form() {
     const [placeholder, setPlaceholder] = React.useState("");
     const [inputValue, setInputValue] = React.useState("");
     const [name, setName] = React.useState("");
-    const [selectedOption, setSelectedOption] = React.useState("sms");
+    const [sdt, setSdt] = React.useState("");
+    const [selectedOption, setSelectedOption] = React.useState("SMS Banking");
+
+    const strictMode = false;
 
     React.useEffect(() => {
         setPlaceholder("Tối đa 12 chữ số");
@@ -64,10 +67,70 @@ export default function Form() {
         const input = e.target.value;
         setSelectedOption(input);
     }
+
+    async function Banking() {
+        var apiLink = "api/SinhVien/banking/" + localStorage.getItem("id");
+        
+        const response = await fetch(apiLink, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "soCCCD": inputValue,
+                "hoTenInTrenThe": name,
+                "ngayCap": document.getElementsByClassName("date-picker")[0].value,
+                "sdt": sdt,
+                "dichVu": selectedOption
+            })
+        
+        });
+
+        console.log(response);
+
+        if (response.ok) {
+            try {
+                const data = await response.text();
+                console.log(data);
+                alert("Đăng ký thành công");
+                window.location.href = "/main";
+            } catch (error) {
+                const data = await response.json();
+                console.log(data);
+            }
+        }
+        else {
+            alert("Đã có lỗi xảy ra, vui lòng thử lại sau");
+        }
+    }
+
+    const validate = () => {
+        if (name === "" || inputValue === "" || sdt === "") {
+            alert("Vui lòng điền đầy đủ thông tin");
+            return false;
+        }
+
+        if (document.getElementsByClassName("date-picker").value === undefined) {
+            alert("Vui lòng chọn ngày cấp");
+            return false;
+        }
+
+        if (sdt.length !== 10) {
+            alert("Số điện thoại không hợp lệ");
+            return false;
+        }
+
+        return true;
+    }
     
     const HandleConfirm = () => {
-        console.log(selectedOption)
-        window.location.href = "/main";
+        if (strictMode) {
+            validate();
+        }
+
+        Banking();
+
+        //window.location.href = "/main";
     }
 
     return (
@@ -89,15 +152,16 @@ export default function Form() {
                     <input className="date-picker" type="date" required={true}/>
                 </div>
                 <div className="form-content-col">
-                    <h2 className="form-title">Nơi cấp</h2>
-                    <input className="text" type="text" required={true}/>
+                    <h2 className="form-title">Số điện thoại</h2>
+                    <input className="text" type="text" required={true} value={sdt} onChange={(e) => (setSdt(e.target.value))}/>
                 </div>
             </div>
             <div className="form-content-col">
                 <select className="select" id="bank" value={selectedOption} onChange={HandleBankChange}>
-                    <option value="sms">Tôi đồng ý tham gia dịch vụ SMS Banking</option>
-                    <option value="internet">Tôi đồng ý tham gia dịch vụ Internet Banking</option>
-                    <option value="both">Tôi đồng ý tham gia cả hai dịch vụ SMS Banking và Internet Banking</option>
+                    <option value="None">Tôi không tham gia các dịch vụ mở rộng</option>
+                    <option value="SMS Banking">Tôi đồng ý tham gia dịch vụ SMS Banking</option>
+                    <option value="Giao dịch Internet (E-Commerce)">Tôi đồng ý tham gia dịch vụ Internet Banking</option>
+                    <option value="All">Tôi đồng ý tham gia cả hai dịch vụ SMS Banking và Internet Banking</option>
                 </select>
             </div>
             <div className="form-content-row">

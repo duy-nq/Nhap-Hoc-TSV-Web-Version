@@ -30,25 +30,25 @@ export default function HomePage() {
       body: JSON.stringify({ 'soCCCD': username, 'matKhau': password }),
   });
 
-  if (response.ok) {
-    const res = await response.json();
+    if (response.ok) {
+      const res = await response.json();
 
-    console.log(res.message);
+      console.log(res.message);
 
-    if (res.data === null) {
-      alert('Sai tên đăng nhập hoặc mật khẩu!');
-      setUsername('');
-      setPassword('');
-      localStorage.removeItem('token');
-      localStorage.removeItem('id');
-    }
-    else {
-      localStorage.setItem('token', res.data);
-      localStorage.setItem('id', username);
-      navigate('/main');
+      if (res.data === null) {
+        alert('Sai tên đăng nhập hoặc mật khẩu!');
+        setUsername('');
+        setPassword('');
+        localStorage.removeItem('token');
+        localStorage.removeItem('id');
+      }
+      else {
+        localStorage.setItem('token', res.data);
+        localStorage.setItem('id', username);
+        navigate('/main');
+      }
     }
   }
-}
 
   const TypeUsername = (event) => {
     setUsername(event.target.value);
