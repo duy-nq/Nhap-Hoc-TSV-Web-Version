@@ -1,3 +1,13 @@
+# Về dự án
+Xây dựng giao diện cho phần mềm hỗ trợ tân sinh viên nhập học trên nền tảng web.
+
+Sử dụng React và Javascript.
+
+# Một số hình ảnh
+Tham khảo tại đường dẫn:
+
+https://drive.google.com/file/d/1_7FJ6RcJpOnUf0vNeaNqs6cjabLsAbgj/view?usp=sharing
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
